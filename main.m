@@ -18,17 +18,17 @@ testTrees_script;
 
 %% 3. Random forest parameters
 %% 3.1 Number of trees
-%N = [1,20,40,60,80,100,120,140,160,180,200,220,240,260,280,300,320,340,360,380,400,420,440,460,480,500];
 %N = [1,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300]
-N = [20,30]
+%N = [2,3,4,5,6,7,8,9,10,11];
+N = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 acc_tr = zeros(1,length(N));
 acc_te = zeros(1,length(N));
 time_tr = zeros(1,length(N));
 time_te = zeros(1,length(N));
-for i = 1:length(N) % Number of trees, try {1,3,5,10, or 20}
-    param.num = N(i);
-    param.depth = 5;    % trees depth
-    param.splitNum = 10; % Number of trials in split function
+for i = 1:length(N)
+    param.num = 240;
+    param.depth = 8;    % trees depth
+    param.splitNum = N(i); % Number of trials in split function
     param.split = 'IG'; % Currently support 'information gain' only
   
     % Train Random Forest
@@ -48,8 +48,8 @@ for i = 1:length(N) % Number of trees, try {1,3,5,10, or 20}
 end
 
 yyaxis left
-title('Performance against Number of Trees')
-xlabel('Number of Trees')
+title('Performance against Number of trials in split function')
+xlabel('Number of trials in split function')
 ylabel('Recognition Accuracy (%)')
 set(gca,'FontSize',13)
 
@@ -64,4 +64,4 @@ yyaxis right
 plot(N,time_tr,'-o',N,time_te,'--o','LineWidth',2);
 
 hold off
-legend('Training Accuracy','Testing','Training Time','Testing Time');
+legend('Training Accuracy','Testing Accuracy','Training Time','Testing Time');
