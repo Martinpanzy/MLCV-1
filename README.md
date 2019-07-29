@@ -1,1 +1,1 @@
-# MLCV-1
+# Randomized Decision Forest for Image Categorization
